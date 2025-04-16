@@ -2,31 +2,24 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func main() {
 	fmt.Println(isPalindrome(121))
 	fmt.Println(isPalindrome(-121))
 	fmt.Println(isPalindrome(10))
+	fmt.Println(isPalindrome(1221))
 
 }
 
 func isPalindrome(x int) bool {
-	if x <= 9 && x >= -9 {
-		if x >= 0 {
-			return true
-		}
+	if x < 0 || (x%10 == 0 && x != 0) {
 		return false
 	}
-	r := strconv.Itoa(x)
-	return r == Reverse(r)
-}
-
-func Reverse(s string) string {
-	runes := []rune(s)
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
+	rev := 0
+	for x > rev {
+		rev = rev*10 + x%10
+		x /= 10
 	}
-	return string(runes)
+	return x == rev || x == rev/10
 }
